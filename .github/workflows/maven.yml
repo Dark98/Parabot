@@ -41,7 +41,7 @@ jobs:
       with:
           path: ~/artifacts/*
           name: 2006Bot-Build
-    - name: upload ARK Release & DEBUG artifact 
+    - name: Upload Parabot Pre-Release
       id: create_release
       uses: softprops/action-gh-release@v1
       env:
