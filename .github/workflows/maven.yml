@@ -35,9 +35,20 @@ jobs:
       run: |
         mvn -B package --file pom.xml
         mkdir -p ~/artifacts
-        mv target/Parabot-V3.0.0.jar ~/artifacts/
+        cp target/Parabot-V3.0.0.jar ~/artifacts/
     - name: Publish build to GH Actions
       uses: actions/upload-artifact@v2
       with:
           path: ~/artifacts/*
           name: 2006Bot-Build
+    - name: upload ARK Release & DEBUG artifact 
+      id: create_release
+      uses: softprops/action-gh-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+      with:
+        tag_name: ${{ steps.get_version.outputs.VERSION }} 
+        name: ${{ github.sha }}
+        prerelease: true
+        files: |
+            target/Parabot-V3.0.0.jar
