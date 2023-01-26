@@ -41,6 +41,10 @@ jobs:
       with:
           path: ~/artifacts/*
           name: 2006Bot-Build
+    - name: Create Version
+      id: get_version
+      run: |
+        echo "VERSION=v$(date +%s)" >> $GITHUB_OUTPUT #&& echo "::set-output name=VERSION::${verson}"
     - name: Upload Parabot Pre-Release
       id: create_release
       uses: softprops/action-gh-release@v1
